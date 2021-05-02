@@ -64,9 +64,30 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	map<string, ll> indeg;
+	map<string, string> paths;
+	string x, y, start;
+	for (ll i = 0; i < n; i++)
 	{
-		
+		cin >> x >> y;
+		indeg[y]++;
+		paths[x] = y;
 	}
+	for (auto i : paths)
+	{
+		if (indeg.find(i.first) == indeg.end())
+		{
+			start = i.first;
+		}
+	}
+	while (paths.find(start) != paths.end())
+	{
+		cout << start;
+		cout << " -> ";
+		start = paths[start];
+	}
+	cout << start << '.' << endl;
 	return 0;
 }

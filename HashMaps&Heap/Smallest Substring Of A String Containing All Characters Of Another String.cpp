@@ -64,9 +64,52 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s1, s2, ans;
+	cin >> s1 >> s2;
+	ans = s1 + s1;
+	map<char, ll> m2;
+	for (char i : s2)
 	{
-		
+		m2[i]++;
 	}
+	ll p1, p2;
+	p1 = 0;
+	p2 = 0;
+	ll score = 0;
+	map<char, ll> m1;
+	while (p1 <= p2 && p2 <= s1.length())
+	{
+		if (score >= s2.length())
+		{
+			if (p2 - p1  < ans.length())
+			{
+				ans = s1.substr(p1, p2 - p1);
+			}
+			m1[s1[p1]]--;
+			if (m1[s1[p1]] < m2[s1[p1]])
+				score--;
+			p1++;
+		}
+		else if (p2 < s1.length())
+		{
+			m1[s1[p2]]++;
+			if (m1[s1[p2]] <= m2[s1[p2]])
+			{
+				score++;
+			}
+			p2++;
+		}
+		else
+		{
+			m1[s1[p1]]--;
+			if (m1[s1[p1]] < m2[s1[p1]])
+				score--;
+			p1++;
+		}
+	}
+	if (ans.length() <= s1.length())
+		cout << ans << endl;
+	else
+		cout << "" << endl;
 	return 0;
 }

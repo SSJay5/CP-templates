@@ -64,9 +64,38 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll k;
+	cin >> k;
+	v<ll> m(k, 0);
+	bool ans = true;
+	for (ll i = 0; i < n; i++)
 	{
-		
+		m[(a[i] % k + k) % k]++;
+	}
+	for (ll i = 1; i < k / 2; i++)
+	{
+		if (m[i] != m[k - i])
+		{
+			ans = false;
+			break;
+		}
+	}
+	if (m[0] % 2 != 0 || m[k / 2] % 2 != 0)
+	{
+		ans = false;
+	}
+	if (ans)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
 	}
 	return 0;
 }

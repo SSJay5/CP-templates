@@ -64,9 +64,34 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll ans = 0;
+	for (ll i = 0; i < n; i++)
 	{
-		
+		ll maxw = a[i];
+		ll minw = a[i];
+		set<ll> s;
+		s.insert(a[i]);
+		for (ll j = i + 1; j < n; j++)
+		{
+			if (s.find(a[j]) != s.end())
+			{
+				break;
+			}
+			s.insert(a[j]);
+			maxw = max(maxw, a[j]);
+			minw = min(minw, a[j]);
+
+			if (maxw - minw == j - i)
+			{
+				ans = max(ans, j - i + 1);
+			}
+		}
 	}
+	cout << ans << endl;
 	return 0;
 }

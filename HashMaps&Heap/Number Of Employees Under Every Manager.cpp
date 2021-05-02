@@ -61,12 +61,51 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
+ll getSize(map<char, v<char>> &ch, char root, map<char, ll> &result)
+{
+	ll ans = 0;
+	if (ch.find(root) == ch.end())
+	{
+		result[root] = 0;
+		return 1;
+	}
+	if (result.find(root) != result.end())
+	{
+		return result[root] + 1;
+	}
+	for (char i : ch[root])
+	{
+		ans += getSize(ch, i, result);
+	}
+	result[root] = ans;
+	return ans + 1;
+}
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	map<char, v<char>> ch;
+	map<char, char> input;
+	char x, y, ceo;
+	for (ll i = 0; i < n; i++)
 	{
-		
+		cin >> x >> y;
+		input[x] = y;
+		if (x != y)
+		{
+			ch[y].emplace_back(x);
+		}
+		else
+		{
+			ceo = x;
+		}
+	}
+	map<char, ll> ans;
+	getSize(ch, ceo, ans);
+	for (auto i : ans)
+	{
+		cout << i.first << sp << i.second << endl;
 	}
 	return 0;
 }
