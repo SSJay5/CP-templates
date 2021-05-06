@@ -64,9 +64,12 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
-	{
+	ll n, k;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	cin >> k;
 	
-	}
 	return 0;
 }

@@ -64,9 +64,78 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n, k;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	cin >> k;
+	ll p1 = 0;
+	ll p2 = 0;
+	ll ans = 0;
+	ll score = 0;
+	if (k > 0)
 	{
-	
+		while (true)
+		{
+			bool f1 = false;
+			bool f2 = false;
+
+			while (p2 < n)
+			{
+				f1 = true;
+				if (a[p2] == 1)
+				{
+					p2++;
+				}
+				else if (score < k)
+				{
+					score++;
+					p2++;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			while (p1 < p2)
+			{
+				f2 = true;
+				ans = max(ans, p2 - p1);
+				if (a[p1] == 0)
+				{
+					score--;
+				}
+				p1++;
+				if (score < k)
+				{
+					break;
+				}
+			}
+
+			if (f1 == false && f2 == false)
+			{
+				break;
+			}
+		}
 	}
+	else
+	{
+		ll temp = 0;
+		for (ll i = 0; i < n; i++)
+		{
+			if (a[i])
+			{
+				temp++;
+			}
+			else
+			{
+				ans = max(ans, temp);
+			}
+		}
+		ans = max(ans, temp);
+	}
+	cout << ans << endl;
 	return 0;
 }

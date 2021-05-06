@@ -64,9 +64,34 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<string> a(n);
+	for (string &i : a)
+		cin >> i;
+	map<pair<ll, ll>, v<string>> m;
+	for (string i : a)
 	{
-	
+		ll f1 = i.length();
+		if (f1 == 1)
+		{
+			m[mp(f1, 27)].emplace_back(i);
+		}
+		else
+		{
+			if (i[1] > i[0])
+				m[mp(f1, i[1] - i[0])].emplace_back(i);
+			else
+				m[mp(f1, (i[1] + 26) - i[0])].emplace_back(i);
+		}
+	}
+	for (auto i : m)
+	{
+		for (auto j : i.second)
+		{
+			cout << j << sp;
+		}
+		cout << endl;
 	}
 	return 0;
 }

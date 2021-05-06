@@ -1,0 +1,1 @@
+{"name":"Local: Find Anagram Mappings","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Find Anagram Mappings.cpp","tests":[{"id":1620297029060,"input":"6\n1 2 3 4 5 2\n4 3 2 1 5 2","output":"3 2 1 0 4 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Find Anagram Mappings.cpp","group":"local","local":true}

@@ -1,0 +1,9 @@
+{
+  "background": {
+    "enable": true,
+    "useDefault": "/home/jay/Downloads/wallpaperflare.com_wallpaper(1).jpg"
+  },
+  "files.associations": {
+    "iostream": "cpp"
+  }
+}

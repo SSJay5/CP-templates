@@ -64,9 +64,24 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	v<ll> b(n);
+	map<ll, queue<ll>> m;
+	for (ll &i : a)
+		cin >> i;
+	for (ll &i : b)
+		cin >> i;
+	for (ll i = 0; i < n; i++)
 	{
-	
+		m[b[i]].push(i);
 	}
+	for (ll i : a)
+	{
+		cout << m[i].front() << sp;
+		m[i].pop();
+	}
+	cout << endl;
 	return 0;
 }

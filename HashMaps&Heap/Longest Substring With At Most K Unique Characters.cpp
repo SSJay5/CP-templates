@@ -64,9 +64,55 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s;
+	ll k;
+	cin >> s >> k;
+	ll p1 = 0;
+	ll p2 = 0;
+	ll ans = 0;
+	ll score = 0;
+	map<ll, ll> m;
+
+	while (true)
 	{
-	
+		bool f1 = false;
+		bool f2 = false;
+
+		while (p2 < s.length())
+		{
+			f1 = true;
+
+			m[s[p2]]++;
+			if (m[s[p2]] == 1)
+			{
+				score++;
+			}
+			if (score > k)
+			{
+				m[s[p2]]--;
+				if (m[s[p2]] == 0)
+					score--;
+				break;
+			}
+			p2++;
+		}
+
+		if (p1 < p2)
+		{
+			f2 = true;
+			ans = max(ans, p2 - p1);
+			m[s[p1]]--;
+			if (m[s[p1]] == 0)
+				score--;
+			p1++;
+		}
+
+		if (f1 == false && f2 == false)
+		{
+			break;
+		}
 	}
+
+	cout << ans << endl;
 	return 0;
 }

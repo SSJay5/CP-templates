@@ -64,9 +64,35 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s1, s2;
+	cin >> s1 >> s2;
+	v<ll> ans;
+	v<ll> m1(26, 0);
+	v<ll> m2(26, 0);
+	for (char i : s2)
 	{
-	
+		m2[i - 'a']++;
 	}
+	for (ll i = 0; i < s2.length(); i++)
+	{
+		m1[s1[i] - 'a']++;
+	}
+	if (m1 == m2)
+	{
+		ans.pb(0);
+	}
+	for (ll i = s2.length(); i < s1.length(); i++)
+	{
+		m1[s1[i] - 'a']++;
+		m1[s1[i - s2.length()] - 'a']--;
+		if (m1 == m2)
+		{
+			ans.pb(i - s2.length() + 1);
+		}
+	}
+	cout << ans.size() << endl;
+	for (ll i : ans)
+		cout << i << sp;
+	cout << endl;
 	return 0;
 }

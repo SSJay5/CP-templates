@@ -61,12 +61,44 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
+ll to_int(string s)
+{
+	ll ans = 0;
+	for (ll i = 0; i < s.length(); i++)
+	{
+		ans = (ans * 2 * 1ll) + (s[i] == '1' ? 1ll : 0);
+	}
+	// cout << s << sp << ans << endl;
+	return ans;
+}
 int main()
 {
 	fastIO();
-	w(t)
+	string s;
+	ll n;
+	cin >> s >> n;
+	bool ans = false;
+	set<ll> st;
+	for (ll i = 1; i <= n; i++)
 	{
-	
+		st.insert(i);
+	}
+	for (ll i = 0; i < s.length(); i++)
+	{
+		for (ll j = i ; j < s.length(); j++)
+		{
+			ll curr = to_int(s.substr(i, j - i + 1));
+			if (st.find(curr) != st.end())
+				st.erase(curr);
+		}
+	}
+	if (st.size() == 0)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
 	}
 	return 0;
 }

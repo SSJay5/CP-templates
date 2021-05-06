@@ -1,0 +1,1 @@
+{"name":"Local: K Anagrams","url":"/home/jay/Work/CP-templates/HashMaps&Heap/K Anagrams.cpp","tests":[{"id":1620286188698,"input":"fodr \ngork\n2","output":"true"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/K Anagrams.cpp","group":"local","local":true}

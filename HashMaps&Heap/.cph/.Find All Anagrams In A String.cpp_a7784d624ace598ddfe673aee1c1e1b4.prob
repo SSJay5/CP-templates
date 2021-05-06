@@ -1,0 +1,1 @@
+{"name":"Local: Find All Anagrams In A String","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Find All Anagrams In A String.cpp","tests":[{"id":1620284963230,"input":"cbaebabacd\nabc","output":"2\n0 6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Find All Anagrams In A String.cpp","group":"local","local":true}

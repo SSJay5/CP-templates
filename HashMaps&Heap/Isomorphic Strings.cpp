@@ -64,9 +64,44 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s1, s2;
+	cin >> s1 >> s2;
+	v<ll> m1(26, 0);
+	v<ll> m2(26, 0);
+	for (char i : s1)
 	{
-	
+		m1[i - 'a']++;
+	}
+	for (char i : s2)
+	{
+		m2[i - 'a']++;
+	}
+	map<ll, ll> m3;
+	map<ll, ll> m4;
+
+	for (ll i = 0; i < 26; i++)
+	{
+		if (m1[i])
+			m3[m1[i]]++;
+		if (m2[i])
+			m4[m2[i]]++;
+	}
+	bool ok = true;
+	for (auto i : m3)
+	{
+		if (m4[i.first] != i.second)
+		{
+			ok = false;
+			break;
+		}
+	}
+	if (ok)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
 	}
 	return 0;
 }

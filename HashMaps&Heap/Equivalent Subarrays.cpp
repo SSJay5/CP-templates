@@ -64,9 +64,66 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	set<ll> s;
+	for (ll i : a)
+		s.insert(i);
+
+	map<ll, ll> m;
+	ll p1 = 0;
+	ll p2 = 0;
+	ll ans = 0;
+	ll score = 0;
+
+	while (true)
 	{
-	
+		bool f1 = false;
+		bool f2 = false;
+
+		while (p2 < n)
+		{
+			f1 = true;
+			m[a[p2]]++;
+			if (m[a[p2]] == 1)
+			{
+				score++;
+			}
+			p2++;
+			if (score == s.size())
+			{
+				break;
+			}
+		}
+
+		while (p1 < p2)
+		{
+			f2 = true;
+			if (score == s.size())
+			{
+				ans += n - p2 + 1;
+			}
+			m[a[p1]]--;
+			if (m[a[p1]] == 0)
+			{
+				score--;
+			}
+			p1++;
+			if (score < s.size())
+			{
+				break;
+			}
+		}
+
+		if (f1 == false && f2 == false)
+		{
+			break;
+		}
 	}
+
+	cout << ans << endl;
 	return 0;
 }

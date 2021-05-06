@@ -64,9 +64,45 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s;
+	cin >> s;
+	v<string> a(s.length());
+	map<char, string> m;
+	set<string> st;
+	bool ans = true;
+	for (string &i : a)
+		cin >> i;
+
+	for (ll i = 0; i < s.length(); i++)
 	{
-	
+		if (m.find(s[i]) == m.end() && st.find(a[i]) == st.end())
+		{
+			m[s[i]] = a[i];
+			st.insert(a[i]);
+		}
+		else if (m.find(s[i]) != m.end() && st.find(a[i]) == st.end())
+		{
+			ans = false;
+			break;
+		}
+		else if (m.find(s[i]) == m.end() && st.find(a[i]) != st.end())
+		{
+			ans = false;
+			break;
+		}
+		else if (m[s[i]] != a[i])
+		{
+			ans = false;
+			break;
+		}
+	}
+	if (ans)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
 	}
 	return 0;
 }

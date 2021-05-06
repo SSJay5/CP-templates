@@ -1,0 +1,1 @@
+{"name":"Local: Equivalent Subarrays","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Equivalent Subarrays.cpp","tests":[{"id":1620039076509,"input":"5\n2 1 3 2 3","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Equivalent Subarrays.cpp","group":"local","local":true}

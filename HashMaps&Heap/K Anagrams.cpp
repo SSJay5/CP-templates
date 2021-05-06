@@ -64,9 +64,39 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	string s1, s2;
+	ll k;
+	cin >> s1 >> s2 >> k;
+	if (s1.length() != s2.length())
 	{
-	
+		cout << "false" << endl;
+		return 0;
+	}
+	v<ll> m1(26, 0);
+	v<ll> m2(26, 0);
+	for (char i : s1)
+		m1[i - 'a']++;
+	for (char i : s2)
+		m2[i - 'a']++;
+	for (ll i = 0; i < 26; i++)
+	{
+		ll minw = min(m1[i], m2[i]);
+		m1[i] -= minw;
+		m2[i] -= minw;
+	}
+	ll sum = 0;
+	for (ll i = 0; i < 26; i++)
+	{
+		sum += m1[i] + m2[i];
+	}
+	// cout << sum << endl;
+	if (sum / 2 <= k)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
 	}
 	return 0;
 }

@@ -1,0 +1,1 @@
+{"name":"Local: Valid Anagram","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Valid Anagram.cpp","tests":[{"id":1620297432516,"input":"pepcoding\ncodingpep","output":"true"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Valid Anagram.cpp","group":"local","local":true}
