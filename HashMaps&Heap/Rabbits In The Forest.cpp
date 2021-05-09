@@ -64,6 +64,37 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	map<ll, ll> m;
+	ll ans = 0;
+
+	for (ll i = 0; i < n; i++)
+	{
+		if (a[i] == 0)
+		{
+			ans++;
+			conti;
+		}
+		if (m[a[i] + 1])
+		{
+			m[a[i] + 1]--;
+			if (m[a[i] + 1] == 0)
+				ans += a[i] + 1;
+		}
+		else
+		{
+			m[a[i] + 1] = a[i];
+		}
+	}
+	for (auto i : m)
+	{
+		if (i.ss)
+			ans += i.ff;
+	}
+	cout << ans << endl;
 	return 0;
 }

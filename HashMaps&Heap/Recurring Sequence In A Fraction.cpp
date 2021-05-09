@@ -64,6 +64,61 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll num, den;
+	cin >> num >> den;
+	string ans = "";
+	ll q = num / den;
+	ll r = num % den;
+	ans += to_string(q);
+	if (r == 0)
+	{
+		cout << ans << endl;
+		return 0;
+	}
+	ans += '.';
+	map<ll, ll> m;
+	bool recurr = false;
+	while (r != 0)
+	{
+		if (m[r])
+		{
+			recurr = true;
+			break;
+		}
+		m[r]++;
+		r = r * 10;
+		ans += to_string(r / den);
+		r = r % den;
+	}
+	if (recurr)
+	{
+		string final_ans;
+		ll i = 0;
+		for (i = 0; i < ans.length(); i++)
+		{
+			if (ans[i] == '.')
+			{
+				break;
+			}
+			final_ans += ans[i];
+		}
+		bool done = false;
+		for (; i < ans.length(); i++)
+		{
+			// cout << (char)(((r * 10) / den) + '0') << endl;
+			if (ans[i] == (char)(((r * 10) / den) + '0') && !done)
+			{
+				done = true;
+				final_ans += '(';
+			}
+			final_ans += ans[i];
+		}
+		final_ans += ')';
+		cout << final_ans << endl;
+	}
+	else
+	{
+		cout << ans << endl;
+	}
 	return 0;
 }

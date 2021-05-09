@@ -1,0 +1,1 @@
+{"name":"Local: Pairs With Equal Sum","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Pairs With Equal Sum.cpp","tests":[{"id":1620480927551,"input":"8\n1 2 998 72 87576 21 45 -1","output":"false"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Pairs With Equal Sum.cpp","group":"local","local":true}

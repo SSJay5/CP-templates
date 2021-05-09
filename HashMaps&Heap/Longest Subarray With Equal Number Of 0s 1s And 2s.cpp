@@ -64,6 +64,40 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll ans = 0;
+	map<pii, ll> m;
+	ll c1 = 0;
+	ll c0 = 0;
+	ll c2 = 0;
+	m[mp(0, 0)] = -1;
+	for (ll i = 0; i < n; i++)
+	{
+		if (a[i] == 0)
+		{
+			c0++;
+		}
+		else if (a[i] == 1)
+		{
+			c1++;
+		}
+		else
+		{
+			c2++;
+		}
+		if (m.find(mp(c0 - c1, c1 - c2)) != m.end())
+		{
+			ans = max(ans, i - m[mp(c0 - c1, c1 - c2)]);
+		}
+		else
+		{
+			m[mp(c0 - c1, c1 - c2)] = i;
+		}
+	}
+	cout << ans << endl;
 	return 0;
 }

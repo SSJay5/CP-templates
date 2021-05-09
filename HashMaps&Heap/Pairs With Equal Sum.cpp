@@ -64,6 +64,32 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	map<ll, ll> m;
+	bool ans = false;
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = i + 1; j < n; j++)
+		{
+			if (m.find(a[i] + a[j]) != m.end())
+			{
+				ans = true;
+				break;
+			}
+			m[a[i] + a[j]]++;
+		}
+	}
+	if (ans)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
+	}
 	return 0;
 }

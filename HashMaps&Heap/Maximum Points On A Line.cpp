@@ -64,6 +64,25 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<pair<ll, ll>> a(n);
+	for (pii &i : a)
+		cin >> i.ff >> i.ss;
+	ll ans = 0;
+
+	for (ll i = 0; i < n; i++)
+	{
+		map<double, ll> m;
+		for (ll j = i + 1; j < n; j++)
+		{
+			double slope = DBL_MAX;
+			if (a[i].ff != a[j].ff)
+				slope = ((double)(a[j].ss - a[i].ss) / (double)(a[j].ff - a[i].ff));
+			m[slope]++;
+			ans = max(ans, m[slope] + 1);
+		}
+	}
+	cout << ans << endl;
 	return 0;
 }

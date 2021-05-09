@@ -64,6 +64,34 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+	{
+		cin >> i;
+		if (i == 0)
+		{
+			i = -1;
+		}
+	}
+	ll sum = 0;
+	map<ll, ll> m;
+	m[0] = -1;
+	ll ans = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		sum += a[i];
+		if (m.find(sum) != m.end())
+		{
+			ans = max(ans, i - m[sum]);
+		}
+		else
+		{
+			m[sum] = i;
+		}
+	}
+	cout << ans << endl;
+
 	return 0;
 }

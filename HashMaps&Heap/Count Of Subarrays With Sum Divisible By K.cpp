@@ -64,6 +64,23 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll k;
+	cin >> k;
+	map<ll, ll> m;
+	ll ans = 0;
+	ll sum = 0;
+	m[0] = 1;
+	for (ll i = 0; i < n; i++)
+	{
+		sum += a[i];
+		ans += m[((sum % k + k) % k)];
+		m[((sum % k) + k) % k]++;
+	}
+	cout << ans << endl;
 	return 0;
 }

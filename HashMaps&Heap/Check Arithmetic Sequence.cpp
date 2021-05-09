@@ -64,6 +64,50 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll firstElement = -1;
+	ll d = -1;
+	ll min1 = intmax;
+	ll min2 = intmax;
+	bool ans = true;
+	for (ll i = 0; i < n; i++)
+	{
+		if (a[i] <= min1)
+		{
+			min2 = min1;
+			min1 = a[i];
+		}
+		else if (a[i] < min2)
+		{
+			min2 = a[i];
+		}
+	}
+	firstElement = min1;
+	d = min2 - min1;
+	map<ll, ll> m;
+	for (ll i = 1; i <= n; i++)
+	{
+		m[firstElement + ((i - 1) * d)]++;
+	}
+	for (ll i : a)
+	{
+		if (m[i] == 0)
+		{
+			ans = false;
+			break;
+		}
+	}
+	if (ans)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
+	}
 	return 0;
 }

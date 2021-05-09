@@ -61,9 +61,55 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
+bool comp(ll a, ll b)
+{
+	return abs(a) < abs(b);
+}
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	if (n & 1)
+	{
+		cout << "false" << endl;
+		return 0;
+	}
+	map<ll, ll> m;
+	for (ll i : a)
+	{
+		m[i]++;
+	}
+	sort(all(a), comp);
+	bool ans = true;
+
+	for (ll i = 0; i < n; i++)
+	{
+		if (m[a[i]])
+		{
+			if (m[2 * a[i]] < m[a[i]])
+			{
+				ans = false;
+				break;
+			}
+			else
+			{
+				ll minw = min(m[a[i]], m[2 * a[i]]);
+				m[a[i]] -= minw;
+				m[2 * a[i]] -= minw;
+			}
+		}
+	}
+	if (ans)
+	{
+		cout << "true" << endl;
+	}
+	else
+	{
+		cout << "false" << endl;
+	}
 	return 0;
 }

@@ -70,6 +70,20 @@ int main()
 	for (ll &i : a)
 		cin >> i;
 	cin >> k;
-	
+	map<ll, ll> m;
+	m[0] = -1;
+	ll sum = 0;
+	ll ans = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		sum += a[i];
+		if (m.find(((sum % k) + k) % k) != m.end())
+		{
+			ans = max(ans, i - m[((sum % k) + k) % k]);
+		}
+		else
+			m[((sum % k) + k) % k] = i;
+	}
+	cout << ans << endl;
 	return 0;
 }

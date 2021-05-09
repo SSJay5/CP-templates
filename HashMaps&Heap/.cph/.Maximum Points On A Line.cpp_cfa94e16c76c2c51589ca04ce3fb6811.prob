@@ -1,0 +1,1 @@
+{"name":"Local: Maximum Points On A Line","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Maximum Points On A Line.cpp","tests":[{"id":1620555712925,"input":"3\n1 1\n2 2\n3 3","output":"3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Maximum Points On A Line.cpp","group":"local","local":true}
