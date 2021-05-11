@@ -61,8 +61,66 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
+bool matSearch(v<v<ll>> &a, ll k)
+{
+	ll n = a.size();
+	ll m = a[0].size();
+	ll x = 0;
+	ll y = m - 1;
+
+	while (x >= 0 && x < n && y >= 0 && y < m)
+	{
+		if (a[x][y] == k)
+		{
+			return true;
+		}
+		else if (k > a[x][y])
+		{
+			x++;
+		}
+		else if (k < a[x][y])
+		{
+			y--;
+		}
+	}
+	return false;
+}
 int main()
 {
 	fastIO();
+	ll n, x;
+	cin >> n;
+	v<v<ll>> a(n, v<ll>(n));
+	v<v<ll>> b(n, v<ll>(n));
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			cin >> b[i][j];
+		}
+	}
+	cin >> x;
+	ll ans = 0;
+	map<ll, ll> m;
+	for (auto i : b)
+	{
+		for (auto j : i)
+			m[j]++;
+	}
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			ans += m[x - a[i][j]];
+		}
+	}
+	cout << ans << endl;
 	return 0;
 }

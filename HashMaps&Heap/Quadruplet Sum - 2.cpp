@@ -64,5 +64,32 @@ void fastIO()
 int main()
 {
 	fastIO();
+	ll n;
+	cin >> n;
+	v<v<ll>> a(4, v<ll>(n));
+	for (ll i = 0; i < 4; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	map<ll, ll> m;
+	ll ans = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			m[a[0][i] + a[1][j]]++;
+		}
+	}
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			ans += m[-(a[2][i] + a[3][j])];
+		}
+	}
+	cout << ans << endl;
 	return 0;
 }

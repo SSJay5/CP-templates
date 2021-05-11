@@ -4,6 +4,9 @@
     "useDefault": "/home/jay/Downloads/wallpaperflare.com_wallpaper(1).jpg"
   },
   "files.associations": {
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "random": "cpp",
+    "cmath": "cpp"
   }
 }

@@ -64,5 +64,24 @@ void fastIO()
 int main()
 {
 	fastIO();
+	ll x, y, b;
+	cin >> x >> y >> b;
+	ll boundX = log(b) / log(x);
+	ll boundY = log(b) / log(y);
+	set<ll> s;
+	for (ll i = 0; i <= boundX; i++)
+	{
+		for (ll j = 0; j <= boundY; j++)
+		{
+			if (pow(x, i) + pow(y, j) > b)
+				break;
+			s.insert(pow(x, i) + pow(y, j));
+		}
+	}
+	for (auto i : s)
+	{
+		cout << i << sp;
+	}
+	cout << endl;
 	return 0;
 }

@@ -64,5 +64,68 @@ void fastIO()
 int main()
 {
 	fastIO();
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll k;
+	cin >> k;
+	sort(all(a));
+
+	v<v<ll>> ans;
+
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = i + 1; j < n; j++)
+		{
+			ll left = j + 1;
+			ll right = n - 1;
+			ll req_sum = k - a[i] - a[j];
+			while (left < right)
+			{
+				if (a[left] + a[right] < req_sum)
+				{
+					left++;
+				}
+				else if (a[left] + a[right] > req_sum)
+				{
+					right--;
+				}
+				else
+				{
+					v<ll> temp(4);
+					temp[0] = a[i];
+					temp[1] = a[j];
+					temp[2] = a[left];
+					temp[3] = a[right];
+
+					ans.pb(temp);
+
+					while (left < right && a[left] == temp[2])
+						left++;
+					while (left < right && a[right] == temp[3])
+						right--;
+				}
+			}
+
+			while (j + 1 < n && a[j + 1] == a[j])
+			{
+				j++;
+			}
+		}
+		while (i + 1 < n && a[i + 1] == a[i])
+		{
+			i++;
+		}
+	}
+	for (v<ll> i : ans)
+	{
+		for (ll j : i)
+		{
+			cout << j << sp;
+		}
+		cout << endl;
+	}
 	return 0;
 }

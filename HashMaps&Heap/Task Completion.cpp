@@ -64,5 +64,37 @@ void fastIO()
 int main()
 {
 	fastIO();
+	ll n, m;
+	cin >> n >> m;
+	v<ll> a(m);
+	for (ll &i : a)
+		cin >> i;
+	v<bool> b(n + 1, true);
+	for (ll i : a)
+		b[i] = false;
+	bool f1 = true;
+	v<ll> ans1;
+	v<ll> ans2;
+	for (ll i = 1; i <= n; i++)
+	{
+		if (b[i])
+		{
+			if (f1)
+				ans1.emplace_back(i);
+			else
+				ans2.emplace_back(i);
+			f1 = !f1;
+		}
+	}
+	for (ll i : ans1)
+	{
+		cout << i << sp;
+	}
+	cout << endl;
+	for (ll i : ans2)
+	{
+		cout << i << sp;
+	}
+	cout << endl;
 	return 0;
 }

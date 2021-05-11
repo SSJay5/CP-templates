@@ -41,11 +41,11 @@ ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1,
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
 typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 /* ordered set:
-tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>
-member functions :
-1. order_of_key(k) : number of elements strictly lesser than k
-2. find_by_order(k) : k-th element in the set
-*/
+	tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>
+	member functions :
+	1. order_of_key(k) : number of elements strictly lesser than k
+	2. find_by_order(k) : k-th element in the set
+	*/
 
 void IO()
 {
@@ -64,5 +64,51 @@ void fastIO()
 int main()
 {
 	fastIO();
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	map<ll, ll> m;
+	for (ll &i : a)
+		m[i]++;
+	ll maxc = 0;
+	for (auto i : m)
+	{
+		if (i.ss > maxc)
+		{
+			maxc = i.ss;
+		}
+	}
+	ll s = 0;
+	ll e = n;
+	map<ll, pii> m1;
+	for (ll i = 0; i < n; i++)
+	{
+		if (m[a[i]] == maxc)
+		{
+			if (m1.find(a[i]) == m1.end())
+			{
+				m1[a[i]] = mp(i, i);
+			}
+			else
+			{
+				m1[a[i]].ss = i;
+			}
+		}
+	}
+	ll ans = 0;
+	for (auto i : m1)
+	{
+		if (i.ss.ss < e)
+		{
+			e = i.ss.ss;
+			s = i.ss.ff;
+			ans = i.ff;
+		}
+	}
+	cout << ans << endl
+			 << s << endl
+			 << e << endl;
 	return 0;
 }

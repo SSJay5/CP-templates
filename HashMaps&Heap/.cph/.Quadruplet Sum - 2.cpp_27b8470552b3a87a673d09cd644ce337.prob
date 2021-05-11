@@ -1,0 +1,1 @@
+{"name":"Local: Quadruplet Sum - 2","url":"/home/jay/Work/CP-templates/HashMaps&Heap/Quadruplet Sum - 2.cpp","tests":[{"id":1620656796219,"input":"2\n1 2\n-2 -1\n-1 2\n0 2","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/jay/Work/CP-templates/HashMaps&Heap/Quadruplet Sum - 2.cpp","group":"local","local":true}
