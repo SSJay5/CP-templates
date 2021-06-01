@@ -2,7 +2,6 @@
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
 using namespace std;
-
 #define Max 1e6
 #define ff first
 #define ss second
@@ -38,6 +37,7 @@ using namespace std;
 #define null NULL
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+ll dk8[8][2] = {{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}};
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
 typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 /* ordered set:
@@ -46,6 +46,43 @@ member functions :
 1. order_of_key(k) : number of elements strictly lesser than k
 2. find_by_order(k) : k-th element in the set
 */
+template <typename T, typename T1>
+T amax(T &a, T1 b)
+{
+	if (b > a)
+		a = b;
+	return a;
+}
+template <typename T, typename T1>
+T amin(T &a, T1 b)
+{
+	if (b < a)
+		a = b;
+	return a;
+}
+ll power(ll x, ll y, ll p)
+{
+	ll res = 1; // Initialize result
+
+	x = x % p; // Update x if it is more than or
+						 // equal to p
+
+	if (x == 0)
+		return 0; // In case x is divisible by p;
+
+	while (y > 0)
+	{
+		// If y is odd, multiply x with result
+		if (y & 1)
+			res = (res * x) % p;
+
+		// y must be even now
+		y = y >> 1; // y = y/2
+		x = (x * x) % p;
+	}
+	return res;
+}
+
 void IO()
 {
 #ifndef ONLINE_JUDGE
@@ -60,19 +97,26 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
-bool comp(pii &a, pii &b)
-{
-	if (a.ss == b.ss)
-	{
-		return a.ff > b.ff;
-	}
-	return a.ss < b.ss;
-}
+
 int main()
 {
 	fastIO();
-	ll n;
-	cin >> n;
-	
+	ll n, k;
+	cin >> n >> k;
+	pbds s;
+	for (ll i = 1; i <= n; i++)
+	{
+		s.insert(i);
+	}
+	ll curr = 0;
+	while (!s.empty())
+	{
+		curr = (curr + k) % s.size();
+		auto it = s.find_by_order(curr);
+		cout << *it << sp;
+		s.erase(*it);
+		// curr =;
+	}
+	cout << endl;
 	return 0;
 }

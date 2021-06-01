@@ -39,7 +39,8 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 ll dk8[8][2] = {{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}};
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
-typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+template <typename T>
+using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 /* ordered set:
 tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>
 member functions :
@@ -98,8 +99,56 @@ void fastIO()
 	cout.tie(0);
 }
 
+bool fun(pii &a, pii &b)
+{
+	if (a.ff == b.ff)
+	{
+		return a.ss > b.ss;
+	}
+	return a.ff < b.ff;
+}
+
 int main()
 {
 	fastIO();
+	ll n;
+	cin >> n;
+	v<pii> a(n);
+	map<pii, ll> m;
+	for (ll i = 0; i < n; i++)
+	{
+		cin >> a[i].ff >> a[i].ss;
+		m[a[i]] = i;
+	}
+	sort(all(a), fun);
+	pbds<pii> s;
+
+	v<ll> contains(n, 0);
+
+	for (ll i = n - 1; i >= 0; i--)
+	{
+		s.insert(mp(a[i].ss, -1 * i));
+		contains[m[a[i]]] = s.order_of_key(mp(a[i].ss, -1 * i));
+	}
+
+	for (ll i : contains)
+	{
+		cout << i << sp;
+	}
+	cout << endl;
+	s.clear();
+	v<ll> contained(n, 0);
+
+	for (ll i = 0; i < n; i++)
+	{
+		s.insert(mp(a[i].ss, -1 * i));
+		contained[m[a[i]]] = s.size() - s.order_of_key(mp(a[i].ss, -1 * i)) - 1;
+	}
+
+	for (ll i : contained)
+	{
+		cout << i << sp;
+	}
+	cout << endl;
 	return 0;
 }
