@@ -87,6 +87,28 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n, k;
+	cin >> n >> k;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	double ans = 0.0;
+	ll sum = 0;
+	for (; k <= n; k++)
+	{
+		sum = 0;
+		for (ll j = 0; j < k; j++)
+		{
+			sum += a[j];
+		}
+		ans = max(ans, (double)(sum) / k);
+		for (ll j = k; j < n; j++)
+		{
+			sum += a[j];
+			sum -= a[j - k];
+			ans = max(ans, (double)(sum) / k);
+		}
+	}
+	cout << ps(ans, 9) << endl;
 	return 0;
 }

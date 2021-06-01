@@ -47,7 +47,7 @@ member functions :
 2. find_by_order(k) : k-th element in the set
 */
 //////////////////////////////////////////////
-int power(ll x, ll y, int p) //x^y
+int power(ll x, ll y, int p = mod) //x^y
 {
 	int res = 1; // Initialize result
 
@@ -87,6 +87,35 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll C = 0;
+	w(t)
+	{
+		C++;
+		ll n, k;
+		cin >> n >> k;
+		string s;
+		cin >> s;
+		ll ans = 0;
+		ll m = (n / 2) + (n & 1);
+		for (ll i = 0; i < m; i++)
+		{
+			// cout << (m)-i - 1 << endl;
+			ans += (power(k, (m)-i - 1) * (s[i] - 'a')) % mod;
+			ans = ans % mod;
+		}
+		string temp;
+		for (ll i = 0; i < (m); i++)
+		{
+			temp += s[i];
+		}
+		for (ll i = 0; i < n - m; i++)
+		{
+			temp += temp[n - m - i - 1];
+		}
+		if (s > temp)
+			ans++;
+
+		cout << "Case #" << C << ": " << ans % mod << endl;
+	}
 	return 0;
 }

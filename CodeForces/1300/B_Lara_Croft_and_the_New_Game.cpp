@@ -87,6 +87,32 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n, m, k;
+	cin >> n >> m >> k;
+	if (k <= n - 1)
+	{
+		cout << k + 1 << sp << 1 << endl;
+		return 0;
+	}
+	k -= n - 1;
+	if (k == 1)
+	{
+		cout << n << sp << 2 << endl;
+		return 0;
+	}
+	k--;
+	ll r = k / (m - 1);
+
+	cout << n - r << sp;
+
+	if (r % 2 == 0)
+	{
+		cout << k % (m - 1) + 2 << endl;
+	}
+	else
+	{
+		cout << m - (k % (m - 1)) << endl;
+	}
+
 	return 0;
 }

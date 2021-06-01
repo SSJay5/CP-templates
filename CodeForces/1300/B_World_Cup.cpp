@@ -87,6 +87,44 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	v<ll> ans(n, 0);
+	for (ll i = 0; i < n; i++)
+	{
+		// ll start = 0;
+		// ll end = n;
+		ll temp_ans = ((a[i] > i) ? ((a[i] - i) / n) : 0) + ((a[i] - i + n) % n == 0 || a[i] < i ? 0 : 1);
+		// while (start <= end)
+		// {
+		// 	ll mid = start + (end - start) / 2;
+		// 	if ((i + (n * mid)) >= a[i])
+		// 	{
+		// 		temp_ans = (i + (n * mid));
+		// 		end = mid - 1;
+		// 	}
+		// 	else
+		// 	{
+		// 		start = mid + 1;
+		// 	}
+		// }
+		ans[i] = (temp_ans * n) + i;
+		// cout << ans[i] << sp;
+	}
+	// cout << endl;
+	ll minw = ans[0];
+	ll mini = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		if (minw >= ans[i])
+		{
+			minw = ans[i];
+			mini = i;
+		}
+	}
+	cout << mini + 1 << endl;
 	return 0;
 }

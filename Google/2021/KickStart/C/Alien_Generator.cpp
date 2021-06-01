@@ -46,30 +46,7 @@ member functions :
 1. order_of_key(k) : number of elements strictly lesser than k
 2. find_by_order(k) : k-th element in the set
 */
-//////////////////////////////////////////////
-int power(ll x, ll y, int p) //x^y
-{
-	int res = 1; // Initialize result
 
-	x = x % p; // Update x if it is more than or
-						 // equal to p
-
-	if (x == 0)
-		return 0; // In case x is divisible by p;
-
-	while (y > 0)
-	{
-		// If y is odd, multiply x with result
-		if (y & 1)
-			res = (res * x) % p;
-
-		// y must be even now
-		y = y >> 1; // y = y/2
-		x = (x * x) % p;
-	}
-	return res;
-}
-//////////////////////////////////////////////
 void IO()
 {
 #ifndef ONLINE_JUDGE
@@ -87,6 +64,36 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll C = 0;
+	w(t)
+	{
+		C++;
+		ll g;
+		cin >> g;
+		v<ll> a;
+		for (ll i = 1; i <= sqrt(2 * g); i++)
+		{
+			if ((2 * g) % i == 0)
+			{
+				a.pb((2 * g) / i);
+				if (i != ((2 * g) / i))
+					a.pb(i);
+			}
+		}
+		sort(all(a));
+		ll ans = 0;
+		for (ll i = 0; i < a.size(); i++)
+		{
+			ll temp = (2 * g) / a[i];
+			temp = temp - a[i] + 1;
+			if (temp % 2 == 0 && temp > 0)
+			{
+				ans++;
+				// cout << temp / 2 << sp;
+			}
+		}
+		// cout << endl;
+		cout << "Case #" << C << ": " << ans << endl;
+	}
 	return 0;
 }

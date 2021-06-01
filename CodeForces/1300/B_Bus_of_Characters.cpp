@@ -87,6 +87,40 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	string s;
+	v<ll> ans;
+	cin >> s;
+	priority_queue<pair<ll, ll>> maxq;
+	priority_queue<pair<ll, ll>, v<pair<ll, ll>>, greater<pair<ll, ll>>> minq;
+
+	for (ll i = 0; i < n; i++)
+	{
+		minq.push(mp(a[i], i));
+	}
+
+	for (char i : s)
+	{
+		if (i == '0')
+		{
+			ans.pb(minq.top().ss);
+			maxq.push(minq.top());
+			minq.pop();
+		}
+		else
+		{
+			ans.pb(maxq.top().ss);
+			maxq.pop();
+		}
+	}
+	for (ll i : ans)
+	{
+		cout << i + 1 << sp;
+	}
+	cout << endl;
 	return 0;
 }

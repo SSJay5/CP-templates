@@ -87,6 +87,55 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll a, b, x;
+	cin >> a >> b >> x;
+	x--;
+	string ans;
+	if (a > b)
+	{
+		ans += '0';
+		a--;
+	}
+	else
+	{
+		b--;
+		ans += '1';
+	}
+	while (x--)
+	{
+		if (ans.back() == '1')
+		{
+			ans += '0';
+			a--;
+		}
+		else
+		{
+			ans += '1';
+			b--;
+		}
+	}
+	if (ans.back() == '0')
+	{
+		while (a--)
+		{
+			ans += '0';
+		}
+		while (b--)
+		{
+			ans += '1';
+		}
+	}
+	else
+	{
+		while (b--)
+		{
+			ans += '1';
+		}
+		while (a--)
+		{
+			ans += '0';
+		}
+	}
+	cout << ans << endl;
 	return 0;
 }

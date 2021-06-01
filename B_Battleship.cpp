@@ -87,6 +87,58 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	ll n, k;
+	cin >> n >> k;
+	v<v<char>> a(n, v<char>(n));
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+
+	ll ans = 0;
+	ll xans = 0;
+	ll yans = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		for (ll j = 0; j < n; j++)
+		{
+			ll curr = 0;
+			if (a[i][j] == '.')
+			{
+				ll up = 0;
+				ll down = 0;
+				while (up < k && i - up >= 0 && a[i - up][j] == '.')
+					up++;
+				while (down < k && i + down < n && a[i + down][j] == '.')
+					down++;
+				curr += max(1ll - 1ll, (down + up - 1) - k + 1);
+
+				if (k != 1)
+				{
+					ll left = 0;
+					ll right = 0;
+					while (left < k && j - left >= 0 && a[i][j - left] == '.')
+					{
+						left++;
+					}
+					while (right < k && j + right < n && a[i][j + right] == '.')
+					{
+						right++;
+					}
+					curr += max(1ll - 1ll, (right + left - 1) - k + 1);
+				}
+			}
+			if (ans < curr)
+			{
+				ans = curr;
+				xans = i;
+				yans = j;
+			}
+		}
+	}
+	cout << xans + 1 << sp << yans + 1 << endl;
 	return 0;
 }

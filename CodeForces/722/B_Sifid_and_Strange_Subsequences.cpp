@@ -87,6 +87,50 @@ void fastIO()
 int main()
 {
 	fastIO();
-	
+	w(t)
+	{
+		ll n;
+		cin >> n;
+		v<ll> a(n);
+		for (ll i = 0; i < n; i++)
+		{
+			cin >> a[i];
+		}
+		sort(all(a));
+		ll ans = 0;
+		bool is_pos = false;
+		ll minw = intmax;
+		for (ll i = 0; i < n; i++)
+		{
+			if (a[i] <= 0)
+			{
+				ans++;
+			}
+			else
+			{
+				is_pos = true;
+			}
+		}
+		if (is_pos)
+		{
+			ll min_diff = intmax;
+			for (ll i = 1; i < n; i++)
+			{
+				if (a[i] <= 0)
+					min_diff = min(min_diff, a[i] - a[i - 1]);
+			}
+			bool found = false;
+			for (ll i = 0; i < n; i++)
+			{
+				if (a[i] > 0 && a[i] <= min_diff)
+				{
+					found = true;
+				}
+			}
+			cout << ans + found << endl;
+		}
+		else
+			cout << ans << endl;
+	}
 	return 0;
 }
