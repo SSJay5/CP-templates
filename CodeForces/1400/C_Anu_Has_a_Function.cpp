@@ -36,7 +36,6 @@ using namespace std;
 #define intmin INT32_MIN
 #define conti continue
 #define null NULL
-#define sc(x) static_cast<x>
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
@@ -47,21 +46,30 @@ member functions :
 1. order_of_key(k) : number of elements strictly lesser than k
 2. find_by_order(k) : k-th element in the set
 */
+//////////////////////////////////////////////
 int power(ll x, ll y, int p) //x^y
 {
 	int res = 1; // Initialize result
-	x = x % p;	 // Update x if it is more than or
+
+	x = x % p; // Update x if it is more than or
+						 // equal to p
+
 	if (x == 0)
 		return 0; // In case x is divisible by p;
+
 	while (y > 0)
 	{
+		// If y is odd, multiply x with result
 		if (y & 1)
 			res = (res * x) % p;
+
+		// y must be even now
 		y = y >> 1; // y = y/2
 		x = (x * x) % p;
 	}
 	return res;
 }
+//////////////////////////////////////////////
 void IO()
 {
 #ifndef ONLINE_JUDGE
@@ -79,72 +87,46 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n;
+	cin >> n;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	if (n == 1)
 	{
-		string s;
-		cin >> s;
-		ll n = s.length();
-		ll ans = 0;
-		ll i = 0;
-		ll j = 0;
-		ll prev = 0;
-		v<pii> exclude;
-
-		while (i < n)
-		{
-			j = i;
-			if (i + 1 < n && s[i] != '?')
-			{
-				if (s[i] == s[i + 1])
-				{
-					exclude.pb(mp(i, i + 1));
-				}
-				i++;
-				conti;
-			}
-			else if (i + 1 == n)
-			{
-				i++;
-				conti;
-			}
-
-			while (j < n && s[j] == '?')
-			{
-				j++;
-			}
-			if (i - 1 < 0 || j == n)
-			{
-				i = j;
-				conti;
-			}
-			ll c = j - i;
-
-			if (c % 2 == 0)
-			{
-				if (s[i - 1] == s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			else
-			{
-				if (s[i - 1] != s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			i = j;
-		}
-		sort(all(exclude));
-		prev = 0;
-		for (pii i : exclude)
-		{
-			ans += ((i.ss - 1 - prev + 1) * (i.ss - 1 - prev + 1 + 1)) / 2;
-			ans -= ((i.ss - i.ff - 1) * (i.ss - i.ff - 1 + 1)) / 2;
-			prev = i.ff + 1;
-		}
-		ans += ((n - 1 - prev + 1) * (n - 1 - prev + 1 + 1)) / 2;
-		cout << ans << endl;
+		cout << a[0] << endl;
+		return 0;
 	}
+	v<ll> prefix(n, 0);
+	v<ll> suffix(n, 0);
+	prefix[0] = suffix[n - 1] = intmax;
+	for (ll i = 1; i < n; i++)
+	{
+		prefix[i] = prefix[i - 1] & (~a[i - 1]);
+	}
+	for (ll i = n - 2; i >= 0; i--)
+	{
+		suffix[i] = suffix[i + 1] & (~a[i + 1]);
+	}
+	ll maxw = 0;
+	ll pos = 0;
+	for (ll i = 0; i < n; i++)
+	{
+		ll ans = a[i] & suffix[i] & prefix[i];
+		if (ans > maxw)
+		{
+			pos = i;
+			maxw = ans;
+		}
+	}
+	cout << a[pos] << sp;
+	for (ll i = 0; i < n; i++)
+	{
+		if (i != pos)
+		{
+			cout << a[i] << sp;
+		}
+	}
+	cout << endl;
 	return 0;
 }

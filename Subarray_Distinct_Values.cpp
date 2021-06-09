@@ -36,7 +36,6 @@ using namespace std;
 #define intmin INT32_MIN
 #define conti continue
 #define null NULL
-#define sc(x) static_cast<x>
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
@@ -47,21 +46,30 @@ member functions :
 1. order_of_key(k) : number of elements strictly lesser than k
 2. find_by_order(k) : k-th element in the set
 */
+//////////////////////////////////////////////
 int power(ll x, ll y, int p) //x^y
 {
 	int res = 1; // Initialize result
-	x = x % p;	 // Update x if it is more than or
+
+	x = x % p; // Update x if it is more than or
+						 // equal to p
+
 	if (x == 0)
 		return 0; // In case x is divisible by p;
+
 	while (y > 0)
 	{
+		// If y is odd, multiply x with result
 		if (y & 1)
 			res = (res * x) % p;
+
+		// y must be even now
 		y = y >> 1; // y = y/2
 		x = (x * x) % p;
 	}
 	return res;
 }
+//////////////////////////////////////////////
 void IO()
 {
 #ifndef ONLINE_JUDGE
@@ -79,72 +87,59 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n, k;
+	cin >> n >> k;
+	v<ll> a(n);
+	for (ll &i : a)
+		cin >> i;
+	ll p1 = 0;
+	ll p2 = 0;
+	map<ll, ll> m;
+	ll score = 0;
+	ll ans = 0;
+	while (true)
 	{
-		string s;
-		cin >> s;
-		ll n = s.length();
-		ll ans = 0;
-		ll i = 0;
-		ll j = 0;
-		ll prev = 0;
-		v<pii> exclude;
+		bool f1 = false;
+		bool f2 = false;
 
-		while (i < n)
+		while (p2 < n)
 		{
-			j = i;
-			if (i + 1 < n && s[i] != '?')
+			f1 = true;
+			m[a[p2]]++;
+			if (m[a[p2]] == 1)
 			{
-				if (s[i] == s[i + 1])
-				{
-					exclude.pb(mp(i, i + 1));
-				}
-				i++;
-				conti;
+				score++;
 			}
-			else if (i + 1 == n)
+			if (score > k)
 			{
-				i++;
-				conti;
+				score--;
+				m[a[p2]]--;
+				break;
 			}
-
-			while (j < n && s[j] == '?')
-			{
-				j++;
-			}
-			if (i - 1 < 0 || j == n)
-			{
-				i = j;
-				conti;
-			}
-			ll c = j - i;
-
-			if (c % 2 == 0)
-			{
-				if (s[i - 1] == s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			else
-			{
-				if (s[i - 1] != s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			i = j;
+			p2++;
 		}
-		sort(all(exclude));
-		prev = 0;
-		for (pii i : exclude)
+
+		while (p1 < p2)
 		{
-			ans += ((i.ss - 1 - prev + 1) * (i.ss - 1 - prev + 1 + 1)) / 2;
-			ans -= ((i.ss - i.ff - 1) * (i.ss - i.ff - 1 + 1)) / 2;
-			prev = i.ff + 1;
+			f2 = true;
+			ans += p2 - p1;
+			m[a[p1]]--;
+			if (m[a[p1]] == 0)
+			{
+				score--;
+			}
+			p1++;
+			if (score < k)
+			{
+				break;
+			}
 		}
-		ans += ((n - 1 - prev + 1) * (n - 1 - prev + 1 + 1)) / 2;
-		cout << ans << endl;
+
+		if (f1 == false && f2 == false)
+		{
+			break;
+		}
 	}
+	cout << ans << endl;
 	return 0;
 }

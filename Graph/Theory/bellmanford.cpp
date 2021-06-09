@@ -76,75 +76,57 @@ void fastIO()
 	cin.tie(0);
 	cout.tie(0);
 }
+class node
+{
+public:
+	ll s, e, wt;
+};
 int main()
 {
 	fastIO();
-	w(t)
+	ll n, m;
+	cin >> n >> m;
+	v<node> a(n);
+	for (ll i = 0; i < n; i++)
 	{
-		string s;
-		cin >> s;
-		ll n = s.length();
-		ll ans = 0;
-		ll i = 0;
-		ll j = 0;
-		ll prev = 0;
-		v<pii> exclude;
+		cin >> a[i].s >> a[i].e >> a[i].wt;
+	}
+	ll src;
+	cin >> src;
+	v<ll> dist(n, inf);
+	dist[src] = 0;
 
-		while (i < n)
+	for (ll i = 0; i < n - 1; i++)
+	{
+		for (node i : a)
 		{
-			j = i;
-			if (i + 1 < n && s[i] != '?')
+			if (dist[i.s] + i.wt < dist[i.e])
 			{
-				if (s[i] == s[i + 1])
-				{
-					exclude.pb(mp(i, i + 1));
-				}
-				i++;
-				conti;
+				dist[i.e] = dist[i.s] + i.wt;
 			}
-			else if (i + 1 == n)
-			{
-				i++;
-				conti;
-			}
-
-			while (j < n && s[j] == '?')
-			{
-				j++;
-			}
-			if (i - 1 < 0 || j == n)
-			{
-				i = j;
-				conti;
-			}
-			ll c = j - i;
-
-			if (c % 2 == 0)
-			{
-				if (s[i - 1] == s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			else
-			{
-				if (s[i - 1] != s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			i = j;
 		}
-		sort(all(exclude));
-		prev = 0;
-		for (pii i : exclude)
+	}
+
+	bool is_neg = false;
+
+	for (node i : a)
+	{
+		if (dist[i.s] + i.wt < dist[i.e])
 		{
-			ans += ((i.ss - 1 - prev + 1) * (i.ss - 1 - prev + 1 + 1)) / 2;
-			ans -= ((i.ss - i.ff - 1) * (i.ss - i.ff - 1 + 1)) / 2;
-			prev = i.ff + 1;
+			is_neg = true;
 		}
-		ans += ((n - 1 - prev + 1) * (n - 1 - prev + 1 + 1)) / 2;
-		cout << ans << endl;
+	}
+	if (is_neg)
+	{
+		cout << "Negative cycle" << endl;
+	}
+	else
+	{
+		for (ll i : dist)
+		{
+			cout << i << sp;
+		}
+		cout << endl;
 	}
 	return 0;
 }

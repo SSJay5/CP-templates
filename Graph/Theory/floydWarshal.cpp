@@ -79,72 +79,30 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
+	ll n, m;
+	cin >> n >> m;
+	v<v<ll>> a(n, v<ll>(n, inf));
+	for (ll i = 0; i < n; i++)
 	{
-		string s;
-		cin >> s;
-		ll n = s.length();
-		ll ans = 0;
-		ll i = 0;
-		ll j = 0;
-		ll prev = 0;
-		v<pii> exclude;
-
-		while (i < n)
-		{
-			j = i;
-			if (i + 1 < n && s[i] != '?')
-			{
-				if (s[i] == s[i + 1])
-				{
-					exclude.pb(mp(i, i + 1));
-				}
-				i++;
-				conti;
-			}
-			else if (i + 1 == n)
-			{
-				i++;
-				conti;
-			}
-
-			while (j < n && s[j] == '?')
-			{
-				j++;
-			}
-			if (i - 1 < 0 || j == n)
-			{
-				i = j;
-				conti;
-			}
-			ll c = j - i;
-
-			if (c % 2 == 0)
-			{
-				if (s[i - 1] == s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			else
-			{
-				if (s[i - 1] != s[j])
-				{
-					exclude.pb(mp(i - 1, j));
-				}
-			}
-			i = j;
-		}
-		sort(all(exclude));
-		prev = 0;
-		for (pii i : exclude)
-		{
-			ans += ((i.ss - 1 - prev + 1) * (i.ss - 1 - prev + 1 + 1)) / 2;
-			ans -= ((i.ss - i.ff - 1) * (i.ss - i.ff - 1 + 1)) / 2;
-			prev = i.ff + 1;
-		}
-		ans += ((n - 1 - prev + 1) * (n - 1 - prev + 1 + 1)) / 2;
-		cout << ans << endl;
+		a[i][i] = 0;
 	}
+	ll x, y, wt;
+	for (ll i = 0; i < m; i++)
+	{
+		cin >> x >> y >> wt;
+		a[x][y] = wt;
+	}
+
+	for (ll k = 0; k < n; k++)
+	{
+		for (ll i = 0; i < n; i++)
+		{
+			for (ll j = 0; j < n; j++)
+			{
+				a[i][j] = min(a[i][j], a[i][k] + a[k][j]);
+			}
+		}
+	}
+	
 	return 0;
 }

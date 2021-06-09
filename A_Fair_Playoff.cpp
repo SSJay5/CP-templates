@@ -2,7 +2,6 @@
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
 using namespace std;
-
 #define Max 1e6
 #define ff first
 #define ss second
@@ -36,6 +35,7 @@ using namespace std;
 #define intmin INT32_MIN
 #define conti continue
 #define null NULL
+#define sc(x) static_cast<x>
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll d8[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 ll d4[4][2] = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
@@ -46,30 +46,21 @@ member functions :
 1. order_of_key(k) : number of elements strictly lesser than k
 2. find_by_order(k) : k-th element in the set
 */
-//////////////////////////////////////////////
 int power(ll x, ll y, int p) //x^y
 {
 	int res = 1; // Initialize result
-
-	x = x % p; // Update x if it is more than or
-						 // equal to p
-
+	x = x % p;	 // Update x if it is more than or
 	if (x == 0)
 		return 0; // In case x is divisible by p;
-
 	while (y > 0)
 	{
-		// If y is odd, multiply x with result
 		if (y & 1)
 			res = (res * x) % p;
-
-		// y must be even now
 		y = y >> 1; // y = y/2
 		x = (x * x) % p;
 	}
 	return res;
 }
-//////////////////////////////////////////////
 void IO()
 {
 #ifndef ONLINE_JUDGE
@@ -87,21 +78,5 @@ void fastIO()
 int main()
 {
 	fastIO();
-	w(t)
-	{
-		v<ll> a(4);
-		for (ll &i : a)
-			cin >> i;
-		v<ll> b = a;
-		sort(all(b));
-		if (((b[2] == max(a[0], a[1])) || b[2] == max(a[2], a[3])) && ((b[3] == max(a[0], a[1])) || b[3] == max(a[2], a[3])))
-		{
-			cout << "YES" << endl;
-		}
-		else
-		{
-			cout << "NO" << endl;
-		}
-	}
 	return 0;
 }
